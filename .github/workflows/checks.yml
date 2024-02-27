@@ -1,0 +1,73 @@
+name: Code Check
+
+on:
+  push:
+    branches:
+        - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  python-checks:
+    name: Python Check
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          pip install -r backend/requirements.txt
+          pip install pycodestyle
+
+
+      - name: Check if README.md file exists
+        run: |
+          if [ ! -f README.md ]; then
+            echo "README.md is mandatory";
+            exit 1;
+          fi
+
+      - name: Check PEP 8 style
+        run: |
+          pycodestyle .
+
+      - name: Check documentation
+        run: |
+          output=$(python backend/check_docs.py)
+          if [ -n "$output" ]; then
+            echo "$output"
+            exit 1
+          fi
+
+  javascript-check:
+    name: Javascript Checks
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "14.x"
+
+      - name: Install JavaScript dependencies
+        run: |
+          cd frontend
+          npm install
+          npm install eslint --save-dev
+          npm ci --prefer-offline
+
+      - name: Check JavaScript files in frontend directory
+        run: |
+          cd frontend
+          npm run eslint -- --max-warnings 0
