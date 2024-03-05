@@ -18,3 +18,4 @@ class Subject(db.Model):
     name = db.Column(db.String(50), nullable=False)
     students = db.relationship('Student', secondary=Student_subjects,
                                back_populates='subjects')
+    requests = db.relationship('Request', back_populates='subjects', lazy=True)
