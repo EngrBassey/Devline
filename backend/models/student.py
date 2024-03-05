@@ -19,6 +19,7 @@ class Student(UserMixin, db.Model):
     password = db.Column(db.String(255), nullable=False)
     subjects = db.relationship('Subject', secondary=Student_subjects,
                                back_populates='students')
+    requests = db.relationship('Request', back_populates='students', lazy=True)
     authenticated = db.Column(db.Boolean, default=False)
     api_key = db.Column(db.String(120), unique=True, nullable=True)
     created_at = db.Column(db.DateTime, nullable=False,
