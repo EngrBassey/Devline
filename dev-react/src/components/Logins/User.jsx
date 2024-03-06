@@ -12,7 +12,7 @@ const User = () => {
                 <img src={FullSphere} className='sphere-2' alt="fullsphere" />
             </div>
             <div className='signin-section'>
-                <h2>Sign in as..</h2>
+                <h2>Sign in as...</h2>
                 <div className='socials-box'>
                     <button className="btn-signin btn-social box-4" > Student </button >
                     <button className="btn-signin btn-social box-4" > Mentor </button >
