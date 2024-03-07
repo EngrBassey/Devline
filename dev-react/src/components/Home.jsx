@@ -10,8 +10,10 @@ import '../App.css';
 const Home = () => {
   return (
     <div className="Home">
+    <div className='nav-bar'>
       <Navbar />
       <Header />
+      </div>
       <Feature />
       <Course />
       <Brands />
