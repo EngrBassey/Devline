@@ -15,7 +15,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/student/login", {
+      const response = await fetch("http://127.0.0.1:5000/api/mentor/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const SignIn = () => {
         <img src={FullSphere} className="sphere-2" alt="fullsphere" />
       </div>
       <div className="signin-section">
-        <h2>Sign In as a Student</h2>
+        <h2>Sign In as a Mentor</h2>
         <form onSubmit={handleSignIn}>
           <div className="socials-box">
             {/* <button className="btn-social">
@@ -85,7 +85,7 @@ const SignIn = () => {
             <div>
               <div className="account-box">
                 <p className="acct-txt">Don't have an account?</p>
-                <a href="/register">Create an account</a>
+                <a href="/register-mentor">Create an account</a>
               </div>
               <div className="f-pass">
                 <a href="">Forgot password?</a>

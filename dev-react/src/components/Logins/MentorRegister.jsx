@@ -25,7 +25,7 @@ const Register = () => {
     try {
       // Make POST request to backend API
       const response = await fetch(
-        "http://127.0.0.1:5000/api/student/register",
+        "http://127.0.0.1:5000/api/mentor/register",
         {
           method: "POST",
           headers: {
@@ -112,7 +112,7 @@ const Register = () => {
             <div>
               <div className="account-box">
                 <p className="acct-txt">have account already?</p>
-                <a href="/signin">Sign in</a>
+                <a href="/signin-mentor">Sign in</a>
               </div>
             </div>
           </div>

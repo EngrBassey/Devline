@@ -4,17 +4,21 @@ import Home from './components/Home';
 import SignIn from './components/Logins/SignIn';
 import Register from './components/Logins/Register';
 import User from './components/Logins/User';
-
+import MentorRegister from './components/Logins/MentorRegister';
+import MentorSignIn from './components/Logins/MentorSignIn';
+// import './App.css';
 
 function App() {
     return (
       <Router>
         <div className="App">
-        <Home />
           <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/users" Component={User} />
             <Route path="/signin" Component={SignIn} />
             <Route path="/register" Component={Register} />
-            <Route path="/user" Component={User} />
+            <Route path="/register-mentor" Component={MentorRegister} />
+            <Route path="/signin-mentor" Component={MentorSignIn} />
           </Routes>
         </div>
       </Router>
