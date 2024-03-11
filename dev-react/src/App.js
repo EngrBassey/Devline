@@ -8,7 +8,8 @@ import Footer from './components/footer/Footer';
 import SignIn from './components/Logins/SignIn';
 import Register from './components/Logins/Register';
 import User from './components/Logins/User';
-
+import Mentor from './components/mentors/Mentor';
+import Student from './components/students/Student';
 import './App.css';
 
 function App() {
@@ -22,9 +23,11 @@ function App() {
       <Course />
       <Brands />
       <Footer /> */}
-      <SignIn />
+{/*       <SignIn />
       <Register />
-      <User />
+      <User /> */}
+      <Mentor />
+      <Student />
     </div>
   );
 }
