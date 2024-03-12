@@ -1,6 +1,6 @@
 """Helper function to create or get
     subject when registering students/mentors"""
-from backend.models.subjects import Subject
+from backend.models.student import Subject
 from backend import db
 
 

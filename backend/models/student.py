@@ -5,10 +5,29 @@ from flask_login import UserMixin
 from backend import db
 import uuid
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, DateTime, ForeignKey, String
-from backend.models.subjects import Subject, Student_subjects
+from sqlalchemy import Column, DateTime, ForeignKey, String, Table
+#from backend.models.subjects import Subject, Student_subjects
 from passlib.hash import sha256_crypt
+#import backend.models.subjects
 
+#Student_subjects = backend.models.subjects.Student_subjects
+
+Student_subjects = Table('student_subjects', db.Model.metadata,
+                         db.Column('student_id', db.String(60),
+                                   db.ForeignKey('students.id')),
+                         db.Column('subject_id', db.Integer,
+                                   db.ForeignKey('subjects.id')))
+
+class Subject(db.Model):
+    #from backend.models.student import Student
+    
+    """Defines the students table"""
+    __tablename__ = 'subjects'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    students = db.relationship('Student', secondary=Student_subjects,
+                               back_populates='subjects')
+    requests = db.relationship('Request', back_populates='subjects', lazy=True)
 
 class Student(UserMixin, db.Model):
     """Student class """

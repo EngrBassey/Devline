@@ -2,10 +2,10 @@
 from uuid import uuid4
 from flask import request, jsonify, make_response
 from backend.api.student import student_api_blueprint
-from backend.models.student import Student
+from backend.models.student import Student, Subject, Student_subjects
 from backend.models.request import Request
-from backend.models.mentor import Mentor
-from backend.models.subjects import Subject, Student_subjects
+from backend.models.mentors_db import Mentor
+#from backend.models.subjects import Subject, Student_subjects
 from backend import db, login_manager
 from backend.utilis.retrieve_subjects import get_or_create_subject
 from backend.utilis.password_reset import send_password_reset_message, generate_reset_token
