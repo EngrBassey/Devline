@@ -31,7 +31,9 @@ def create_app():
 
     with app.app_context():
         # Register blueprints
-        from backend.api.student import student_api_blueprint, mentor_api_blueprint
+        from backend.api.student import student_api_blueprint, mentor_api_blueprint, subject_api_blueprint
+
         app.register_blueprint(student_api_blueprint)
         app.register_blueprint(mentor_api_blueprint)
+        app.register_blueprint(subject_api_blueprint)
         return app

@@ -33,7 +33,6 @@ class Mentor(db.Model):
                            default=datetime.utcnow,
                            onupdate=datetime.utcnow)
     requests = db.relationship('Request', back_populates='mentors', lazy=True)
-    api_key = db.Column(db.String(300), unique=True, nullable=True)
     years_of_experience = db.Column(db.Integer, nullable=False)
     api_key = db.Column(db.String(120), unique=True, nullable=True)
     
@@ -104,4 +103,4 @@ class Subject_m(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     mentors = db.relationship('Mentor', secondary=mentors_subjects,
-                              back_populates='subjects')
+                                back_populates='subjects')
