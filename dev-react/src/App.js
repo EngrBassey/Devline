@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
 import Home from './components/Home';
 import SignIn from './components/Logins/SignIn';
 import Register from './components/Logins/Register';
 import User from './components/Logins/User';
+import Mentor from './components/mentors/Mentor';
+import Student from './components/students/Student';
+import './App.css';
 import MentorRegister from './components/Logins/MentorRegister';
 import MentorSignIn from './components/Logins/MentorSignIn';
 // import './App.css';
@@ -24,6 +26,4 @@ function App() {
       </Router>
     );
   }
-
-
 export default App;
