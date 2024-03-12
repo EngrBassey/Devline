@@ -92,7 +92,7 @@ const Course = () => {
     return (
         <div className='carousel'>
             <div className="carousel-box">
-                <h2>Top rated courses</h2>
+                <h2 id='mentors'>Available Mentors</h2>
                 <Slider className='ment' {...settings}>
                     {course.map((item, index) => (
                         <div key={index} className="box">
