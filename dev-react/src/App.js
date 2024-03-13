@@ -10,6 +10,7 @@ import Register from './components/Logins/Register';
 import User from './components/Logins/User';
 import Mentor from './components/mentors/Mentor';
 import Student from './components/students/Student';
+import Mentorjoin from './components/Signupmentor/Mentorjoin';
 import './App.css';
 
 function App() {
@@ -26,8 +27,9 @@ function App() {
 {/*       <SignIn />
       <Register />
       <User /> */}
-      <Mentor />
-      <Student />
+{/*       <Mentor />
+      <Student /> */}
+      <Mentorjoin />
     </div>
   );
 }
