@@ -5,25 +5,31 @@ import Register from './components/Logins/Register';
 import User from './components/Logins/User';
 import Mentor from './components/mentors/Mentor';
 import Student from './components/students/Student';
+import Mentorjoin from './components/Signupmentor/Mentorjoin';
 import './App.css';
 import MentorRegister from './components/Logins/MentorRegister';
 import MentorSignIn from './components/Logins/MentorSignIn';
 // import './App.css';
 
 function App() {
-    return (
-      <Router>
-        <div className="App">
-          <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/users" Component={User} />
-            <Route path="/signin" Component={SignIn} />
-            <Route path="/register" Component={Register} />
-            <Route path="/register-mentor" Component={MentorRegister} />
-            <Route path="/signin-mentor" Component={MentorSignIn} />
-          </Routes>
-        </div>
-      </Router>
-    );
-  }
+  return (
+    <div className="App">
+      {/* <div className='nav-bar'>
+        <Navbar />
+        <Header />
+      </div>
+      <Feature />
+      <Course />
+      <Brands />
+      <Footer /> */}
+{/*       <SignIn />
+      <Register />
+      <User /> */}
+{/*       <Mentor />
+      <Student /> */}
+      <Mentorjoin />
+    </div>
+  );
+}
+
 export default App;
