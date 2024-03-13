@@ -26,7 +26,7 @@ def create_app():
     app.url_map.strict_slashes = False
 
     # Cross-Origin Resource Sharing
-    cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+    cors = CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 
     with app.app_context():
         # Register blueprints

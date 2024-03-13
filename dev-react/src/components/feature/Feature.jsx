@@ -6,7 +6,7 @@ import { FaChalkboard, FaChalkboardUser, FaCode } from "react-icons/fa6";
 const Feature = () => {
     return (
         <div className='features-offer'>
-            <h2>What we Offer</h2>
+            <h2 id='offer'>What we Offer</h2>
             <div className='features-section1'>
                 <div className="offer offer-box1">
                     <FaChalkboard size={40} className='icons' />
@@ -21,7 +21,7 @@ const Feature = () => {
                     <p>Sharpen your coding skills and reinforce your knowledge through our
                         interactive coding challenges. Designed to simulate real-world scenarios, our challenges offer practical exercises across
                         various programming languages and problem-solving techniques.</p>
-                    <button className="btn">Get Started</button>            
+                    <button className="btn">Get Started</button>
                 </div>
                 <div className="offer offer-box3">
                     <FaChalkboardUser size={40} className='icons' />

@@ -40,11 +40,11 @@ def register_student():
     email = request_body.get('email')
     username = request_body.get('username')
     password = request_body.get('password')
-    subjects = request_body.get('subjects')
+    # subjects = request_body.get('subjects')
 
     # Validate required fields
     if not all(key in request_body for key in ('username', 'email',
-                                               'password', 'subjects')):
+                                               'password')):
         return jsonify({'success': False,
                         'message': 'Missing required fields'}), 400
 
@@ -57,7 +57,7 @@ def register_student():
                         'Email or Username already exists'}), 409
 
     # Create a new student
-    register_new(username, email, password, subjects)
+    register_new(username, email, password)
     return jsonify({'success': True, 'message': 'Registered successfully'})
 
 
@@ -198,7 +198,7 @@ def send_mentorship_request():
                                   'You are not logged in'}))
 
 
-def register_new(username, email, password, subjects):
+def register_new(username, email, password):
     """Helper function to register new student"""
     new_student = Student()
     new_student.username = username,
@@ -206,12 +206,12 @@ def register_new(username, email, password, subjects):
     new_student.set_password(password)
     print(new_student)
 
-    subject_ids = [get_or_create_subject(subject_name)
-                   for subject_name in subjects]
-    for subject_id in subject_ids:
-        subject = Subject.query.get(subject_id)
-        if subject:
-            new_student.subjects.append(subject)
+    # subject_ids = [get_or_create_subject(subject_name)
+    #                for subject_name in subjects]
+    # for subject_id in subject_ids:
+    #     subject = Subject.query.get(subject_id)
+    #     if subject:
+    #         new_student.subjects.append(subject)
     db.session.add(new_student)
     db.session.commit()
 
