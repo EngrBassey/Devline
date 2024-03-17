@@ -27,9 +27,8 @@ const SignIn = () => {
       navigate("/dashboard");
       console.log("Login successful");
     } else {
-      // Login failed
       setError(response.message);
-      setMessage(""); // Reset message state
+      setMessage("");
     }
   };
   return (

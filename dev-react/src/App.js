@@ -55,8 +55,8 @@ function App() {
             <Route path="/register-mentor" Component={MentorRegister} />
             <Route path="/mentor-signin" Component={MentorSignIn} />
             <Route path="/mentor-join" Component={Mentorjoin} />
-            <Route path="/search/:subject" element={<MentorSearch /> } />
-                      <Route path="/mentors" element={ <AllMentors />} />
+            <Route path="/search/:subject" element={<MentorSearch />} />
+            <Route path="/mentors" element={<AllMentors />} />
 
             <Route element={<AuthenticatedMentorRoute />}>
               <Route path="/active-requests" Component={ActiveRequests} />

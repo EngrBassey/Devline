@@ -56,8 +56,6 @@ const StudentProfile = () => {
             <p>
               <strong>Subjects:</strong> {profileData.subjects.join(", ")}
             </p>
-
-            {/* Add more profile details */}
           </div>
         )}
       </div>

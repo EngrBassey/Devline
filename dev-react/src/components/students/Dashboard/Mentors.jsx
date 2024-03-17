@@ -5,8 +5,6 @@ import Header from "./Header";
 import { NameContext } from "../../../App";
 import Aside from "./Aside";
 import { MdColorLens, MdOutlineAccessTime } from "react-icons/md";
-// import Modal from './Modal'; // Import the modal component
-// import MentorshipRequestModal from "./MentorshipRequestModal";
 import "./home.css";
 // ...imports
 

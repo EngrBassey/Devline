@@ -56,7 +56,6 @@ const Search = () => {
                 ))}
               </ul>
               <p>Time Available: {mentor.time_available}</p>
-              {/* Add more mentor details as needed */}
             </div>
           ))}
         </div>

@@ -22,13 +22,11 @@ const Register = () => {
       return;
     }
 
-    // Call the register function from StudentAuth module
     const response = await API.register(username, email, password);
     if (response.success) {
       setMessage("Registration successful");
       navigate("/signin");
     } else {
-      // Handle registration errors
       setMessage(response.message);
     }
   };

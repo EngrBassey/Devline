@@ -21,7 +21,6 @@ const ReviewMentorPage = () => {
       );
       if (response.success) {
         setSuccessMessage("Review submitted successfully.");
-        // Redirect to another page if needed
       } else {
         setError("Failed to submit review.");
       }

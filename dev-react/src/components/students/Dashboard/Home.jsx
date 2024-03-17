@@ -6,7 +6,7 @@ import { FaUsers } from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6";
 import "./home.css";
 import StudentAuth from "../API";
-import MentorSearch from "./Search"; // Import the MentorSearch component
+import MentorSearch from "./Search";
 
 const StudentHome = () => {
   const [mentorshipRequests, setMentorshipRequests] = useState([]);

@@ -33,11 +33,10 @@ const SendRequest = () => {
         setFlashMessage("success");
         navigate("/dashboard");
       } else {
-        // Handle other response cases if needed
+        console.log(response.message)
       }
     } catch (error) {
       console.error("Error sending mentorship request:", error);
-      // Handle error if needed
     }
   };
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);

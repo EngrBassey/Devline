@@ -11,7 +11,7 @@ const SignInMentor = () => {
   const navigate = useNavigate();
   const handleSignIn = async (e) => {
     e.preventDefault();
-    // Call MentorAuth.login function
+
     const response = await MentorAuth.login(username, password);
     if (response.success) {
       // Handle successful login

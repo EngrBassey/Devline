@@ -12,12 +12,12 @@ const Main = () => {
             <div className="main-title">
                 <h3>DASHBOARD</h3>
             </div>
-            {/* <div className="main-cards"> */}
-                {/* <div className="card">
+            <div className="main-cards">
+                 <div className="card">
                     <h2>Requests</h2>
                     <AiFillAlert className='card_icon' />
                 </div>
-                <div className="card">
+                {/* <div className="card">
                     <h2>Sessions</h2>
                     <SiGoogleclassroom className='card_icon' />
                 </div>
@@ -28,8 +28,8 @@ const Main = () => {
                 <div className="card">
                     <h2>Messages</h2>
                     <FaMessage className='card_icon' />
-                </div>
-            </div> */}
+                </div> */}
+            </div>
             <div className="tracking">
                 <div className="">
                     <Lists />
