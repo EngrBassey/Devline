@@ -1,44 +1,30 @@
 import React, { useState } from "react";
+import MentorAuth from "../API";
 import { useNavigate } from "react-router-dom";
-import "./sign.css";
-import { FaGoogle, FaFacebook } from "react-icons/fa6";
-import FullSphere from "../../asserts/sphere (1).png";
-import HalfSphere from "../../asserts/sphere.png";
+import FullSphere from "../../../assets/sphere (1).png";
+import HalfSphere from "../../../assets/sphere.png";
 
-const SignIn = () => {
-  const [email, setEmail] = useState("");
+const SignInMentor = () => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
   const handleSignIn = async (e) => {
     e.preventDefault();
+    // Call MentorAuth.login function
+    const response = await MentorAuth.login(username, password);
+    if (response.success) {
+      // Handle successful login
 
-    try {
-      const response = await fetch("http://127.0.0.1:5000/api/mentor/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        // navigate to dashboard
-        navigate("/home");
-        console.log("Login successful");
-      } else {
-        setError(data.message || "An error occurred. Please try again.");
-      }
-    } catch (error) {
-      setError("An error occurred. Please try again.");
+      console.log("Login successful");
+      navigate("/mentor/dashboard");
+      // Redirect or perform any necessary action upon successful login
+    } else {
+      // Handle login error
+      setError(response.message);
     }
   };
+
   return (
     <div className="signin-box">
       <div className="sphere-box">
@@ -49,29 +35,14 @@ const SignIn = () => {
         <h2>Sign In as a Mentor</h2>
         <form onSubmit={handleSignIn}>
           <div className="socials-box">
-            {/* <button className="btn-social">
-            <div className="btn-child">
-              <FaGoogle size={15} />
-              <p>Continue with Google</p>
-            </div>
-          </button> */}
-            {/* <button className="btn-social box-2">
-                        <div className="btn-child">
-                            <FaFacebook size={15} />
-                            <p>Continue with Google</p>
-                        </div>
-                    </button> */}
-          </div>
-          <div className="socials-box">
-            {/* <p>or</p> */}
             {error && <p className="error-message">{error}</p>}
             <input
               type="text"
               className="box-input"
-              placeholder="Email"
+              placeholder="Username"
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <input
               type="password"
@@ -98,4 +69,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInMentor;

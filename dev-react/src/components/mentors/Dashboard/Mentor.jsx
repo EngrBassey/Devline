@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Sidebar from './Sidebar';
 import Main from './Main';
 import Nav from './Nav';
-import './mentor.css';
+import '../mentor.css';
 
 const Mentor = () => {
 

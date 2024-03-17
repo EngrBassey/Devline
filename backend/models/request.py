@@ -32,10 +32,11 @@ class Request(db.Model):
     def to_json(self):
         return {
             'id': self.id,
-            'mentor_id': self.mentor_id,
-            'student_id': self.student_id,
-            'subject_id': self.subject_id,
+            'mentor': self.mentors.first_name +' ' +  self.mentors.surname,
+            'student': self.students.username,
+            'subject_id': self.subjects.name,
             'message': self.message,
             'status': self.status,
-            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            'time': str(self.mentors.time_available),
+            'created_at': str(self.created_at.strftime('%Y-%m-%d %H:%M:%S'))
         }

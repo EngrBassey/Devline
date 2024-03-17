@@ -1,8 +1,8 @@
 import React from "react";
-import "./sign.css";
+import "../students/Auth/sign.css"
 // import { FaGoogle, FaFacebook } from "react-icons/fa6";
-import FullSphere from "../../asserts/sphere (1).png";
-import HalfSphere from "../../asserts/sphere.png";
+import FullSphere from "../../assets/sphere (1).png";
+import HalfSphere from "../../assets/sphere.png";
 import { Link } from "react-router-dom";
 
 const User = () => {

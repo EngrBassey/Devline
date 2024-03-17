@@ -17,4 +17,18 @@ def load_user(id):
         return Student.query.filter_by(id=id).first()
     else:
         return None
+
+
+@login_manager.request_loader
+def load_user_from_request(request):
+    """Loads User from Request"""
+
+    api_key = request.headers.get('Authorization')
+    if api_key:
+        # student_id = api_key.replace('Basic ', '', 1)
+        student = Student.query.filter_by(id=api_key).first()
+        if student:
+            return student
+        return None
+
 from backend.api.student import routes

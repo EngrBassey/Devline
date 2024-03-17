@@ -1,5 +1,5 @@
 import React from 'react';
-import './mentor.css';
+import '../mentor.css';
 import Lists from './Lists';
 import { AiFillAlert } from "react-icons/ai";
 import { SiGoogleclassroom } from "react-icons/si";
@@ -12,8 +12,8 @@ const Main = () => {
             <div className="main-title">
                 <h3>DASHBOARD</h3>
             </div>
-            <div className="main-cards">
-                <div className="card">
+            {/* <div className="main-cards"> */}
+                {/* <div className="card">
                     <h2>Requests</h2>
                     <AiFillAlert className='card_icon' />
                 </div>
@@ -29,10 +29,9 @@ const Main = () => {
                     <h2>Messages</h2>
                     <FaMessage className='card_icon' />
                 </div>
-            </div>
+            </div> */}
             <div className="tracking">
-                <h3>Todays Activies</h3>
-                <div className="activites">
+                <div className="">
                     <Lists />
                 </div>
                 <div className='student lists'>

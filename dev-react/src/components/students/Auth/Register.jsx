@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../API";
 import "./sign.css";
-import FullSphere from "../../asserts/sphere (1).png";
-import HalfSphere from "../../asserts/sphere.png";
+import FullSphere from "../../../assets/sphere (1).png";
+import HalfSphere from "../../../assets/sphere.png";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -10,43 +11,25 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  // Function to handle form submission
-  const handleSubmit = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-
     // Check if passwords match
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
 
-    try {
-      // Make POST request to backend API
-      const response = await fetch(
-        "http://127.0.0.1:5000/api/student/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, username, password }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        navigate("/home");
-        console.log("Registration successful");
-      } else {
-        // Handle registration errors
-        setError(data.message);
-      }
-    } catch (error) {
-      console.error("Error registering:", error);
-      setError("Error registering. Please try again later.");
+    // Call the register function from StudentAuth module
+    const response = await API.register(username, email, password);
+    if (response.success) {
+      setMessage("Registration successful");
+      navigate("/signin");
+    } else {
+      // Handle registration errors
+      setMessage(response.message);
     }
   };
 
@@ -57,24 +40,11 @@ const Register = () => {
         <img src={FullSphere} className="sphere-2" alt="fullsphere" />
       </div>
       <div className="signin-section">
-        <h2>Sign Up as a User</h2>
-        <form onSubmit={handleSubmit}>
+        <h2>Sign Up as a Student</h2>
+        <form onSubmit={handleRegister}>
+          <div className="socials-box"></div>
           <div className="socials-box">
-            {/* <button className="btn-social">
-              <div className="btn-child">
-                <FaGoogle size={15} />
-                <p>Continue with Google</p>
-              </div>
-            </button> */}
-            {/* <button className="btn-social box-2">
-              <div className="btn-child">
-                <FaFacebook size={15} />
-                <p>Continue with Google</p>
-              </div>
-            </button> */}
-          </div>
-          <div className="socials-box">
-            {/* <p>or</p> */}
+            {message && <p>{message}</p>}
             {error && <p className="error-message">{error}</p>}
             <input
               type="text"

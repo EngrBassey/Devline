@@ -74,9 +74,11 @@ class Mentor(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'subjects': [subject.name for subject in self.subjects],
+            'subjects_id':[subject.id for subject in self.subjects],
             'is_active': True,
             'years_of_experience': self.years_of_experience,
-            'api_key': self.api_key
+            'api_key': self.api_key,
+            'time_available': str(self.time_available)
         }
 
     def __repr__(self):

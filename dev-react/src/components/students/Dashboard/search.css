@@ -1,0 +1,38 @@
+/* CSS for mentor card */
+.mentor-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .mentor-card:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .mentor-card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .mentor-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
+
+  .mentor-card p {
+    margin-bottom: 5px;
+  }
+
+  .mentor-card ul {
+    margin-top: 5px;
+    padding-left: 20px;
+  }
+
+  .mentor-card li {
+    margin-bottom: 5px;
+  }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './mentor.css';
+import '../mentor.css';
 import { TbAlignJustified } from "react-icons/tb";
 
 

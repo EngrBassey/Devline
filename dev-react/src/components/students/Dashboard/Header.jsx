@@ -1,6 +1,7 @@
 import React from 'react';
-import '../mentors/mentor.css';
+import '../../mentors/mentor.css';
 import { TbAlignJustified } from "react-icons/tb";
+
 
 const Header = ({ OpenSidebar }) => {
     return (

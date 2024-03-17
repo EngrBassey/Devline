@@ -1,24 +1,22 @@
-import React from 'react';
-import './brands.css'
+import React from "react";
+import "./brands.css";
 
 const brandList = [
-    require('../../asserts/slack.png'),
-    require('../../asserts/atlassian.png'),
-    require('../../asserts/shopify.png'),
-    require('../../asserts/dropbox.png'),
-    require('../../asserts/google.png'),
-]
+  require("../../assets/slack.png"),
+  require("../../assets/atlassian.png"),
+  require("../../assets/shopify.png"),
+  require("../../assets/dropbox.png"),
+  require("../../assets/google.png"),
+];
 
 const Brands = () => {
   return (
-    <div className='brand-component'>
+    <div className="brand-component">
       {brandList.map((items) => (
         <img src={items} alt="company-logo" />
-      ))
-
-      }
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default Brands
+export default Brands;

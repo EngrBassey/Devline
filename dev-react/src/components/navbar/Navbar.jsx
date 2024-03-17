@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
-import logo from "../../asserts/logo-1.png";
-import { Link } from "react-router-dom";
+import logo from "../../assets/logo-1.png";
+import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 
 const Menu = () => (
@@ -16,24 +16,50 @@ const Menu = () => (
       <a href="#offer">How it Works</a>
     </p>
     <p>
-      <a href="#becomeamentor">Become a Mentor</a>
+      <Link to="/mentor-join">Become a Mentor</Link>
     </p>
   </>
 );
+
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    if (searchQuery.trim() !== "") {
+        navigate(`/search/${encodeURIComponent(searchQuery)}`);
+    }
+  };
 
   return (
     <div className="gpt3__navbar">
       <div className="gpt3__navbar-links">
         <div className="gpt3__navbar-links_logo">
-          <img src={logo} />
+          <img src={logo} alt="Logo" />
         </div>
       </div>
       <div className="gpt3__navbar-links_container">
         <Menu />
       </div>
+      <form onSubmit={handleSearchSubmit}>
+                <input
+                  type="text"
+                  placeholder="Search for mentor by subject"
+                  value={searchQuery}
+                  onChange={handleSearchInputChange}
+                />
+                <button type="submit">search</button>
+              </form>
       <div className="gpt3__navbar-sign">
+      <p>
+          <Link to="/mentors">Available Mentors</Link>
+        </p>
         <p>
           <Link to="/users">Sign in</Link>
         </p>
@@ -59,6 +85,7 @@ const Navbar = () => {
           <div className="gpt3__navbar-menu_container scale-up-center">
             <div className="gpt3__navbar-menu_container-links">
               <Menu />
+
             </div>
             <div className="gpt3__navbar-menu_container-links-sign">
               <p>
