@@ -1,6 +1,6 @@
 # test_mentor.py
 
-from ..models.mentors_db import Mentor
+from ..models.mentor import Mentor
 from backend import db
 import pytest
 
@@ -32,11 +32,11 @@ def in_valid_mentor():
         api_key='api_key_123',
         years_of_experience=5
     )
-    
+
 def test_invalid_names(in_valid_mentor):
     '''test invalid mentor'''
     assert in_valid_mentor.valid_names() == False
-    
+
 def test_valid_names(new_mentor):
     '''test valid mentor'''
     assert new_mentor.valid_names() == True

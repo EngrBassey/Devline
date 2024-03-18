@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import './join.css'
 import { FaHeadSideVirus } from "react-icons/fa6";
 import { MdWorkspacePremium } from "react-icons/md";
@@ -32,10 +33,10 @@ const Mentorjoin = () => {
                 </div>
             </div>
             <div className="apply-btn">
-                <button className="btn">Apply Now</button>
+                <button className="btn"><Link to="/register-mentor">Apply Now</Link></button>
             </div>
             <div>
-                <button>Apply</button>
+                <button><Link to="/register-mentor">Apply</Link></button>
             </div>
             <div className="ourmentors-profile">
                 <div className="m-profile">
