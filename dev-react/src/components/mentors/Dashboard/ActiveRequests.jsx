@@ -14,7 +14,7 @@ const ActiveRequests = () => {
     const fetchRequests = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:5000/api/mentor/requests",
+          "http://devline.live/api/mentor/requests",
           {
             headers: {
               "Content-Type": "application/json",
