@@ -17,9 +17,7 @@ const MentorList = () => {
   useEffect(() => {
     const fetchMentors = async () => {
       try {
-        const response = await fetch(
-          "http://127.0.0.1:5000/api/mentor/mentors"
-        );
+        const response = await fetch("http://devline.live/api/mentor/mentors");
         const data = await response.json();
         setMentors(data);
       } catch (error) {
@@ -54,43 +52,40 @@ const MentorList = () => {
             <br />
           </div>
           <div className="cards">
-
             {mentors.map((mentor) => (
-              <div key={mentor.id} >
-              <div className="box-req">
-                    <MdOutlineAccessTime size={40} />
-                          <h3>{mentor.fullname}</h3>
-                          <p>
-                  <b>Email:</b> {mentor.email}
-                </p>
-                <p>
-                  <b>Years of Experience:</b> {mentor.years_of_experience}
-                </p>
-                <ul>
+              <div key={mentor.id}>
+                <div className="box-req">
+                  <MdOutlineAccessTime size={40} />
+                  <h3>{mentor.fullname}</h3>
                   <p>
-                    <b>Areas of Concentration: </b>
+                    <b>Email:</b> {mentor.email}
                   </p>
-                  {mentor.subjects.map((subject, subIndex) => (
-                    <li key={subIndex}>
-                      <p>{subject}</p>
-                    </li>
-                  ))}
-                </ul>
-                <p>
-                  <b>Time available:</b> {mentor.time_available} Tuesdays and
-                  Fridays
-                </p>
+                  <p>
+                    <b>Years of Experience:</b> {mentor.years_of_experience}
+                  </p>
+                  <ul>
+                    <p>
+                      <b>Areas of Concentration: </b>
+                    </p>
+                    {mentor.subjects.map((subject, subIndex) => (
+                      <li key={subIndex}>
+                        <p>{subject}</p>
+                      </li>
+                    ))}
+                  </ul>
+                  <p>
+                    <b>Time available:</b> {mentor.time_available} Tuesdays and
+                    Fridays
+                  </p>
 
-
-                <Link
-
-                onClick={() => handleSelectMentor(mentor)}
-                  to={`/send-request/${mentor.id}`}
-                  className="btn logout"
-                >
-                  Send Request
-                </Link>
-              </div>
+                  <Link
+                    onClick={() => handleSelectMentor(mentor)}
+                    to={`/send-request/${mentor.id}`}
+                    className="btn logout"
+                  >
+                    Send Request
+                  </Link>
+                </div>
               </div>
             ))}
           </div>

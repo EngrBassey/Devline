@@ -4,7 +4,7 @@ const StudentAuth = {
 
     register: async (username, email, password) => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/register', {
+            const response = await fetch('http://devline.live/api/student/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -21,7 +21,7 @@ const StudentAuth = {
 
     login: async (username, password) => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/login', {
+            const response = await fetch('http://devline.live/api/student/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ const StudentAuth = {
 
     logout: async () => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/logout');
+            const response = await fetch('http://devline.live/api/student/logout');
             const data = await response.json();
             return data;
         } catch (error) {
@@ -53,7 +53,7 @@ const StudentAuth = {
     getProfile: async () => {
         try {
             const id = localStorage.getItem('student_id');
-            const response = await fetch('http://127.0.0.1:5000/api/student/profile/', {
+            const response = await fetch('http://devline.live/api/student/profile/', {
                 headers: {
                     'Authorization': `${id}`
                 }
@@ -68,7 +68,7 @@ const StudentAuth = {
 
     updateProfile: async (username, email) => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/profile/', {
+            const response = await fetch('http://devline.live/api/student/profile/', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ const StudentAuth = {
 
     deleteAccount: async () => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/delete', {
+            const response = await fetch('http://devline.live/api/student/delete', {
                 method: 'DELETE'
             });
             const data = await response.json();
@@ -100,7 +100,7 @@ const StudentAuth = {
         const id = localStorage.getItem('student_id');
         console.log(id)
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/requests', {
+            const response = await fetch('http://devline.live/api/student/requests', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `${id}`
@@ -119,7 +119,7 @@ const StudentAuth = {
     searchMentor: async (subject) => {
         const id = localStorage.getItem('student_id');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/search/mentors', {
+            const response = await fetch('http://devline.live/api/student/search/mentors', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -137,7 +137,7 @@ const StudentAuth = {
     sendMentorshipRequest: async (mentorId, subjectId, message) => {
         const id = localStorage.getItem('student_id');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/request', {
+            const response = await fetch('http://devline.live/api/student/request', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ const StudentAuth = {
 
     getMentor: async (mentorId) => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/mentor/mentor', {
+            const response = await fetch('http://devline.live/api/mentor/mentor', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -174,7 +174,7 @@ const StudentAuth = {
     completeRequest: async (requestId) => {
         const id = localStorage.getItem('student_id');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/request/complete', {
+            const response = await fetch('http://devline.live/api/student/request/complete', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -193,7 +193,7 @@ const StudentAuth = {
     reviewMentor: async (requestId, rating, reviewText) => {
         const id = localStorage.getItem('student_id');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/review/mentor', {
+            const response = await fetch('http://devline.live/api/student/review/mentor', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -211,7 +211,7 @@ const StudentAuth = {
 
     resetPasswordMessage: async (email) => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/student/reset-password-message', {
+            const response = await fetch('http://devline.live/api/student/reset-password-message', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -15,7 +15,7 @@ const ActiveSessions = () => {
     const fetchRequests = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:5000/api/student/requests",
+          "http://devline.live/api/student/requests",
           {
             headers: {
               "Content-Type": "application/json",

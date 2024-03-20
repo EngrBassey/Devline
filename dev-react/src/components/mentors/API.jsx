@@ -4,7 +4,7 @@ const MentorAuth = {
 
     register: async (userData) => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/mentor/register', {
+            const response = await fetch('http://devline.live/api/mentor/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -21,7 +21,7 @@ const MentorAuth = {
 
     login: async (username, password) => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/mentor/login', {
+            const response = await fetch('http://devline.live/api/mentor/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ const MentorAuth = {
 
     logout: async () => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/mentor/logout');
+            const response = await fetch('http://devline.live/api/mentor/logout');
             const data = await response.json();
             return data;
         } catch (error) {
@@ -53,7 +53,7 @@ const MentorAuth = {
     getProfile: async () => {
         try {
             const id = localStorage.getItem('mentor_id');
-            const response = await fetch('http://127.0.0.1:5000/api/mentor/profile/', {
+            const response = await fetch('http://devline.live/api/mentor/profile/', {
                 headers: {
                     'Authorization': `${id}`
                 }
@@ -68,7 +68,7 @@ const MentorAuth = {
 
     deleteAccount: async () => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/mentor/delete', {
+            const response = await fetch('http://devline.live/api/mentor/delete', {
                 method: 'DELETE'
             });
             const data = await response.json();
@@ -83,7 +83,7 @@ const MentorAuth = {
         const id = localStorage.getItem('mentor_id');
         try {
             console.log(id)
-            const response = await fetch('http://127.0.0.1:5000/api/mentor/requests', {
+            const response = await fetch('http://devline.live/api/mentor/requests', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `${id}`
@@ -101,7 +101,7 @@ const MentorAuth = {
     getRequest: async (requestId) => {
         const id = localStorage.getItem('mentor_id');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/mentor/request', {
+            const response = await fetch('http://devline.live/api/mentor/request', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ const MentorAuth = {
     acceptRequest: async (requestId) => {
         const id = localStorage.getItem('mentor_id');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/mentor/accept', {
+            const response = await fetch('http://devline.live/api/mentor/accept', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -139,7 +139,7 @@ const MentorAuth = {
     completeRequest: async (requestId) => {
         const id = localStorage.getItem('mentor_id');
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/mentor/request/complete', {
+            const response = await fetch('http://devline.live/api/mentor/request/complete', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
