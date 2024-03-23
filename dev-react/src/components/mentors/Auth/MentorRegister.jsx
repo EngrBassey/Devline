@@ -4,6 +4,7 @@ import "../../students/Auth/sign.css";
 import FullSphere from "../../../assets/sphere (1).png";
 import HalfSphere from "../../../assets/sphere.png";
 import Choices from 'choices.js';
+import 'choices.js/public/assets/styles/choices.css'; // Import Choices CSS
 
 import MentorAuth from "../API";
 
@@ -34,21 +35,29 @@ const SignUpForm = () => {
       placeholder: true,
       placeholderValue: "Select subjects",
       removeItemButton: true,
+      maxItemCount: 10,
     });
 
+    // Event listener for changes in the Choices plugin
     selectElement.addEventListener('change', (event) => {
-      const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
-      setFormData({ ...formData, subjects: selectedOptions });
+      // Check if event.detail.choices exists
+      if (event.detail.choices) {
+        const selectedOptions = Array.from(event.detail.choices.getValue(true));
+        setFormData({ ...formData, subjects: selectedOptions });
+      }
     });
 
     return () => {
       choices.destroy();
       selectElement.removeEventListener('change', (event) => {
-        const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
-        setFormData({ ...formData, subjects: selectedOptions });
+        if (event.detail.choices) {
+          const selectedOptions = Array.from(event.detail.choices.getValue(true));
+          setFormData({ ...formData, subjects: selectedOptions });
+        }
       });
     };
   }, []);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,8 +93,8 @@ const SignUpForm = () => {
 
   const subjects = [
     "JavaScript", "Python", "Java", "C++", "Parallel Computing", "Cryptocurrency",
-    "HTML", "CSS", "PHP", "Ruby", "Swift", "TypeScript", "Go", "Kotlin", "Rust",
-    "SQL", "R", "Shell", "Scala", "Lua", "Algorithm Design", "Data Structures",
+    "HTML", "CSS", "PHP", "Ruby", "TypeScript", "Go", "Rust",
+    "SQL", "R", "Shell", "Algorithm Design", "Data Structures",
     "Web Development", "Mobile App Development", "Game Development",
     "Network Programming", "CyberSecurity", "Machine Learning",
     "Artificial Intelligence", "Data Science", "Database Management",
@@ -176,11 +185,14 @@ const SignUpForm = () => {
               value={formData.time_available}
               onChange={handleChange}
             />
+            <br />
             <select
               multiple
               className="box-input box-3"
+                          style={{ backgroundColor: "black" }}
               ref={selectRef}
             >
+                          <option value="" style={{ backgroundColor: "black", color: "black" }}>Select</option>
               {subjects.map((subject) => (
                 <option key={subject} value={subject}>
                   {subject}

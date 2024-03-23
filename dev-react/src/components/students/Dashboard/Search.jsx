@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import StudentAuth from "../API";
-import './search.css'
+import './search.css';
 import Navbar from "../../navbar/Navbar";
 
 import Mentor from "../../../assets/mentor.jpeg";
@@ -22,7 +22,6 @@ const Search = () => {
           setError(null);
         } else {
           setError("No mentors found.");
-          console.log(response.message)
           setLoading(false);
         }
       } catch (error) {
@@ -37,16 +36,16 @@ const Search = () => {
 
   return (
     <div className='nav-bar'>
-    <Navbar />
-    <div className="search">
-      <div>
+      <Navbar />
+      <div className="search">
         <h1>Search Results for {subject}</h1>
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
+        {(!mentors) && <p>No mentors found.</p>}
         <div>
-          {mentors.map((mentor) => (
+          {mentors && mentors.map((mentor) => (
             <div key={mentor.id} className="mentor-card">
-            <img src={Mentor} alt="mentor"/>
+              <img src={Mentor} alt="mentor" />
               <h2>{mentor.fullname}</h2>
               <p>Email: {mentor.email}</p>
               <p>Years of Experience: {mentor.years_of_experience}</p>
@@ -60,7 +59,6 @@ const Search = () => {
           ))}
         </div>
       </div>
-    </div>
     </div>
   );
 };

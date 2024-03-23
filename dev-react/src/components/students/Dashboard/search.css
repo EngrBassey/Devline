@@ -36,3 +36,27 @@
   .mentor-card li {
     margin-bottom: 5px;
   }
+
+/* Add this CSS to your existing search.css file */
+
+.box-re {
+    background-color: #ffffff; /* Set background color to white */
+    color: #ffffff; /* Set text color to white */
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    width: calc(33.33% - 20px); /* Set initial width for 3 cards per row */
+    display: inline-block;
+  }
+
+  @media (max-width: 768px) {
+    .box-re {
+      width: calc(50% - 20px); /* Adjust width for 2 cards per row on smaller screens */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .box-re {
+      width: calc(100% - 20px); /* Adjust width for 1 card per row on even smaller screens */
+    }
+  }
