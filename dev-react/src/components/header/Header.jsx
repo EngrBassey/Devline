@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./header.css";
 import Headerimage from "../../assets/undraw_youtube_tutorial_re_69qc.svg";
 import People from "../../assets/people.png";
+
 const Header = () => {
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    if (searchQuery.trim() !== "") {
+      navigate(`/search/${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
   return (
     <div className="header">
       <div className="header-section">
@@ -15,8 +32,17 @@ const Header = () => {
             </p>
           </div>
           <div className="search-section">
-            <input type="text" id="searchInput" name="search" />
-            <button className="btn">Search</button>
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                type="text"
+                id="searchInput"
+                name="search"
+                placeholder="Search for mentor by subject"
+                value={searchQuery}
+                onChange={handleSearchInputChange}
+              />
+              <button type="submit" className="btn">search</button>
+            </form>
           </div>
         </div>
         <div className="header-section2">

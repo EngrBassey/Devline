@@ -33,7 +33,7 @@
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
 }
-.box-req h3, .box-req p {
+.box-req h3, .box-req p, .m-icons {
     color: #081227 !important;
 }
 .apply-btn {

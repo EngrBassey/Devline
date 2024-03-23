@@ -10,7 +10,7 @@ const Menu = () => (
       <a href="/">Home</a>
     </p>
     <p>
-      <a href="#mentors">Mentors</a>
+      <a href="#mentors">About us</a>
     </p>
     <p>
       <a href="#offer">How it Works</a>
@@ -33,7 +33,7 @@ const Navbar = () => {
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     if (searchQuery.trim() !== "") {
-        navigate(`/search/${encodeURIComponent(searchQuery)}`);
+      navigate(`/search/${encodeURIComponent(searchQuery)}`);
     }
   };
 
@@ -47,17 +47,17 @@ const Navbar = () => {
       <div className="gpt3__navbar-links_container">
         <Menu />
       </div>
-      <form onSubmit={handleSearchSubmit}>
-                <input
-                  type="text"
-                  placeholder="Search for mentor by subject"
-                  value={searchQuery}
-                  onChange={handleSearchInputChange}
-                />
-                <button type="submit">search</button>
-              </form>
+      {/* <form onSubmit={handleSearchSubmit}>
+        <input
+          type="text"
+          placeholder="Search for mentor by subject"
+          value={searchQuery}
+          onChange={handleSearchInputChange}
+        />
+        <button type="submit">search</button>
+      </form> */}
       <div className="gpt3__navbar-sign">
-      <p>
+        <p>
           <Link to="/mentors">Available Mentors</Link>
         </p>
         <p>
