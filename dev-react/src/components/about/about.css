@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+.how-section {
+    background: #081227;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 400px;
+    font-family: "Montserrat", sans-serif;
+    color: #fff;
+    padding: 20px;
+    font-size: 18px;
+    margin-bottom: 50px;
+}
+.first-txt p {
+    margin-top: 50px;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+}
+.mission-container, .our-team-container, .top-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+.mission-box {
+    width: 450px;
+    height: auto;
+    margin: 20px 20px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+}
+.team-box {
+    width: 250px;
+    font-family: "Montserrat", sans-serif;
+    height: auto;
+    margin: 20px 20px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+.top-section p{
+    width: 70%;
+}
+.team-box img {
+    border-radius: 50%;
+    width: 50% !important;
+}
+.links {
+    color: #081227;
+    margin: 4px;
+}
+.about-us-container .btn {
+    margin-bottom: 50px;
+}

@@ -1,0 +1,39 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap between cards as needed */
+}
+
+.card {
+    flex: 0 1 calc(33.33% - 20px); /* Adjust card width to fit three cards per row with gap */
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+    transition: transform 0.3s ease; /* Add smooth transition for hover effect */
+}
+
+.card:hover {
+    transform: translateY(-4px); /* Add lift effect on hover */
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-image {
+    width: 100%;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.card-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.card-info {
+    margin: 0;
+    font-size: 1rem;
+    color: #555555;
+}

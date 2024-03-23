@@ -1,0 +1,84 @@
+.list-box p {
+    color: #000;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 10px 0px 0px 10px!important;
+}
+.list-box p:hover {
+    background-color: #263043;
+    color: aqua;
+    padding: 3px;
+}
+
+/* MentorRequests.css */
+.mentor-requests-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .error-message {
+    color: red;
+  }
+
+  .no-requests-message {
+    font-style: italic;
+    color: #666;
+  }
+
+  .request-status {
+    margin-bottom: 20px;
+  }
+
+  .request-item {
+    background-color: #070609;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .student-name {
+    font-weight: bold;
+  }
+
+  .subject {
+    font-style: italic;
+  }
+
+  .time {
+    font-weight: bold;
+    color: #555;
+  }
+
+  .accept-button,
+  .complete-button {
+    background-color: #4caf50;
+    /* color: white; */
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .accept-button:hover,
+  .complete-button:hover {
+    background-color: #45a049;
+  }
+  .error-message,
+  .success-message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+  .error-message {
+    background-color: #f44336; /* Red */
+    color: white;
+  }
+
+  .success-message {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+
