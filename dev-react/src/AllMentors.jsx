@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
+import { CgProfile } from "react-icons/cg";
 import "./components/students/Dashboard/search.css";
+import './allcss.css'
 import { MdColorLens, MdOutlineAccessTime } from "react-icons/md";
 
 const AllMentors = () => {
@@ -20,43 +22,41 @@ const AllMentors = () => {
   }, []);
 
   return (
-    <div className="nav-bar">
+    <div className="all-mntors">
       <div className="main-container">
-        <div className="main-cards">
-          <div className="main-title">
-            <h2>Mentors</h2>
-            <br />
-          </div>
-          <div className="cards">
-            {mentors.map((mentor) => (
-              <div key={mentor.id}>
-                <div className="box-req">
-                  <MdOutlineAccessTime size={40} />
-                  <h3>{mentor.fullname}</h3>
+      <div className="m-title">
+        <h2>Mentors</h2>
+        <br />
+      </div>
+        <div className="cards">
+          {mentors.map((mentor) => (
+            <div key={mentor.id}>
+              <div className="box-req">
+                <CgProfile size={40} className="img-icons" />
+                <h3>{mentor.fullname}</h3>
+                <p>
+                  <b>Email:</b> {mentor.email}
+                </p>
+                <p>
+                  <b>Years of Experience:</b> {mentor.years_of_experience}
+                </p>
+                <ul>
                   <p>
-                    <b>Email:</b> {mentor.email}
+                    <b>Areas of Concentration: </b>
                   </p>
-                  <p>
-                    <b>Years of Experience:</b> {mentor.years_of_experience}
-                  </p>
-                  <ul>
-                    <p>
-                      <b>Areas of Concentration: </b>
-                    </p>
-                    {mentor.subjects.map((subject, subIndex) => (
-                      <li key={subIndex}>
-                        <p>{subject}</p>
-                      </li>
-                    ))}
-                  </ul>
-                  <p>
-                    <b>Time available:</b> {mentor.time_available} Tuesdays and
-                    Fridays
-                  </p>
-                </div>
+                  {mentor.subjects.map((subject, subIndex) => (
+                    <li key={subIndex}>
+                      <p>{subject}</p>
+                    </li>
+                  ))}
+                </ul>
+                <p>
+                  <b>Time available:</b> {mentor.time_available} Tuesdays and
+                  Fridays
+                </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

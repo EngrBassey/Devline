@@ -1,0 +1,18 @@
+.all-mntors {
+    background-color: #fff !important;
+}
+.m-title, .img-icons {
+    color: #081227;
+}
+.box-req {
+    text-align: left;
+    width: 230px !important;
+}
+.box-req ul{
+    padding-left: 0px !important;
+}
+@media screen and (max-width: 639px){
+    .cards {
+        justify-content: center !important;
+    }
+}

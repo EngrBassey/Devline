@@ -105,7 +105,8 @@ h3 {
 }
 
 .card:first-child {
-    background-color: rgb(144, 96, 192);
+    background-color: #4CAF50;
+    color: #fff;
 }
 
 .card:nth-child(2) {

@@ -7,8 +7,12 @@ import Choices from 'choices.js';
 
 import MentorAuth from "../API";
 
+
 const SignUpForm = () => {
+
   const navigate = useNavigate();
+  const [type, setType] = useState('text');
+
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -163,10 +167,12 @@ const SignUpForm = () => {
               onChange={handleChange}
             />
             <input
-              type="time"
+              type={type}
+              onFocus={() => setType('time')}
+              onBlur={() => setType('text')}
               name="time_available"
               className="box-input box-3"
-              placeholder="Time Available (HH:MM AM/PM)"
+              placeholder="HH:MM)"
               value={formData.time_available}
               onChange={handleChange}
             />
