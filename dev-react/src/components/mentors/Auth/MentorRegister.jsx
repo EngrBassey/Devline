@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../../students/Auth/sign.css";
 import FullSphere from "../../../assets/sphere (1).png";
 import HalfSphere from "../../../assets/sphere.png";
+import TimePicker from 'react-time-picker';
 import Choices from 'choices.js';
 import 'choices.js/public/assets/styles/choices.css'; // Import Choices CSS
 
@@ -35,26 +36,21 @@ const SignUpForm = () => {
       placeholder: true,
       placeholderValue: "Select subjects",
       removeItemButton: true,
-      maxItemCount: 10,
     });
 
-    // Event listener for changes in the Choices plugin
-    selectElement.addEventListener('change', (event) => {
-      // Check if event.detail.choices exists
-      if (event.detail.choices) {
-        const selectedOptions = Array.from(event.detail.choices.getValue(true));
-        setFormData({ ...formData, subjects: selectedOptions });
-      }
-    });
+    const handleSubjectChange = (event) => {
+      const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        subjects: selectedOptions,
+      }));
+    };
+
+    selectElement.addEventListener('change', handleSubjectChange);
 
     return () => {
       choices.destroy();
-      selectElement.removeEventListener('change', (event) => {
-        if (event.detail.choices) {
-          const selectedOptions = Array.from(event.detail.choices.getValue(true));
-          setFormData({ ...formData, subjects: selectedOptions });
-        }
-      });
+      selectElement.removeEventListener('change', handleSubjectChange);
     };
   }, []);
 
@@ -75,6 +71,7 @@ const SignUpForm = () => {
 
     try {
       // Register mentor
+      console.log(formData)
       const response = await MentorAuth.register(formData);
 
       if (response.success) {
@@ -106,8 +103,8 @@ const SignUpForm = () => {
   return (
     <div className="signin-box">
       <div className="sphere-box">
-        <img src={HalfSphere} className="sphere-1" alt="" />
-        <img src={FullSphere} className="sphere-2" alt="fullsphere" />
+        <img src={HalfSphere} className="sphere-1" alt="" style={{ width: "200px" }}/>
+        <img src={FullSphere} className="sphere-2" alt="fullsphere" style={{ width: "90px" }}/>
       </div>
       <div className="signin-section">
         <h2>Sign Up as a Mentor</h2>
@@ -176,12 +173,12 @@ const SignUpForm = () => {
               onChange={handleChange}
             />
             <input
-              type={type}
-              onFocus={() => setType('time')}
+              type="time"
+            //   onFocus={() => setType('time')}
               onBlur={() => setType('text')}
               name="time_available"
               className="box-input box-3"
-              placeholder="HH:MM)"
+              placeholder="Time Available HH:MM"
               value={formData.time_available}
               onChange={handleChange}
             />
@@ -192,7 +189,7 @@ const SignUpForm = () => {
                           style={{ backgroundColor: "black" }}
               ref={selectRef}
             >
-                          <option value="" style={{ backgroundColor: "black", color: "black" }}>Select</option>
+                          <option value="" style={{ backgroundColor: "black", color: "black" }} class="select">Select Subjects</option>
               {subjects.map((subject) => (
                 <option key={subject} value={subject}>
                   {subject}

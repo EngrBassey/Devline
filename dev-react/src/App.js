@@ -30,6 +30,8 @@ import CompletedSessions from "./components/students/Dashboard/CompletedSessions
 import ReviewMentorPage from "./components/students/Dashboard/ReviewMentor";
 import MentorSearch from "./components/students/Dashboard/Search";
 import AllMentors from "./AllMentors";
+import About from "./components/about/About";
+import Howitworks from "./components/howitworks/howitworks";
 export const NameContext = createContext();
 
 // Create a Context Provider
@@ -57,7 +59,8 @@ function App() {
             <Route path="/mentor-join" Component={Mentorjoin} />
             <Route path="/search/:subject" element={<MentorSearch />} />
             <Route path="/mentors" element={<AllMentors />} />
-
+            <Route path="/about" Component={About} />
+            <Route path="/how" Component={Howitworks} />
             <Route element={<AuthenticatedMentorRoute />}>
               <Route path="/active-requests" Component={ActiveRequests} />
               <Route path="/completed-requests" Component={CompletedRequests} />

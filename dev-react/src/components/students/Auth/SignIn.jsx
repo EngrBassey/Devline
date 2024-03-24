@@ -34,7 +34,7 @@ const SignIn = () => {
   return (
     <div className="signin-box">
       <div className="sphere-box">
-        <img src={HalfSphere} className="sphere-1" alt="" />
+        <img src={HalfSphere} className="sphere-1" alt="" style={{ width: "200px" }}/>
         <img src={FullSphere} className="sphere-2" alt="fullsphere" />
       </div>
       <div className="signin-section">

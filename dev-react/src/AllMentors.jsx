@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { CgProfile } from "react-icons/cg";
 import "./components/students/Dashboard/search.css";
 import './allcss.css'
+import Menu from './components/navbar/Navbar';
 import { MdColorLens, MdOutlineAccessTime } from "react-icons/md";
 
 const AllMentors = () => {
@@ -23,6 +24,7 @@ const AllMentors = () => {
 
   return (
     <div className="all-mntors">
+     <Menu />
       <div className="main-container">
       <div className="m-title">
         <h2>Mentors</h2>
