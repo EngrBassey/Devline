@@ -55,7 +55,8 @@ class Student(UserMixin, db.Model):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'subjects': self.subjects,
+            'subjects': [subject.name for subject in self.subjects],
+            'subjects_id':[subject.id for subject in self.subjects],
             'api_key': self.api_key,
             'is_active': True
         }

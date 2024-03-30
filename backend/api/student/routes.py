@@ -1,7 +1,7 @@
 """Defines routes for students API"""
 from uuid import uuid4
 from flask import request, jsonify, make_response, session
-from backend.api.student import student_api_blueprint
+from backend.api.student import load_user_from_request, student_api_blueprint
 from backend.models.review import Review
 from backend.models.student import Student, Subject, Student_subjects
 from backend.models.request import Request
@@ -14,22 +14,6 @@ from flask_login import current_user, login_required, login_user, logout_user
 import secrets
 from flask_mail import Mail, Message
 from itsdangerous import TimedSerializer
-
-
-
-@login_manager.request_loader
-def load_user_from_request(request):
-    """Loads User from Request"""
-    type = session.get('type')
-    if type == 'student':
-        api_key = request.headers.get('Authorization')
-        print(api_key)
-        if api_key:
-            api_key = api_key.replace('Basic ', '', 1)
-            student = Student.query.filter_by(api_key=api_key).first()
-            if student:
-                return student
-            return None
 
 
 @student_api_blueprint.route('/register', methods=['POST'])
@@ -90,10 +74,8 @@ def login_student():
         session.permanent = True
         session['type'] = 'student'
         login_user(student, remember=True)
-
-        print(current_user)
         return jsonify({'success': True, 'message': 'Login successful',
-                        'api_key': student.api_key}), 200
+                        'api_key': student.api_key, 'id': student.id, 'username': student.username}), 200
     return jsonify({'success': False,
                     'message': 'Invalid email or password'}), 401
 
@@ -102,37 +84,30 @@ def login_student():
 
 def logout_student():
     """Logout logged in user"""
-    print(current_user)
-    # print(Student.get_id())
     if current_user.is_authenticated:
         logout_user()
     return make_response(jsonify({'success': True,
                                   'message': 'You are now logged out'}))
 
 
-@login_required
+
 @student_api_blueprint.route('/profile/')
 def get_student_profile():
     """Retrieves student's profile Information"""
-    if current_user.is_authenticated:
-        student_subjects = [subject.name for subject in current_user.subjects]
-        student_profile = {
-            'username': current_user.username,
-            'email': current_user.email,
-            'subjects of interest': student_subjects,
-            'date_joined': current_user.created_at
-        }
-        return make_response(jsonify({'result': student_profile}))
+    current_user = load_user_from_request(request)
+    if current_user:
+        return make_response(jsonify({'success':True, 'result': current_user.to_json()}))
     return make_response(jsonify({'success': False,
-                                  'message': 'You are not logged in'}))
+                                  'message': 'You are not logged in'})), 401
 
 
-@student_api_blueprint.route('/profile/', methods=['PUT'])
-@login_required
+@student_api_blueprint.route('/profile', methods=['PUT'])
+
 def update_student_profile():
     """Updates the student profile"""
     request_body = request.json
-    if current_user.is_authenticated:
+    student=load_user_from_request(request)
+    if student.id:
         if request_body.get('username'):
             current_user.username = request_body.get('username')
         if request_body.get('email'):
@@ -145,7 +120,6 @@ def update_student_profile():
 
 
 @student_api_blueprint.route('/delete', methods=['DELETE'])
-@login_required
 def delete_student():
     """Delete the a student's account"""
     db.session.delete(current_user)
@@ -155,52 +129,54 @@ def delete_student():
                     'message': 'Your Account has been deleted successfully'})
 
 
-@student_api_blueprint.route('/search/mentors')
+@student_api_blueprint.route('/search/mentors', methods=['POST'])
 def search_mentor():
     """Searches for mentors based on specified criteria."""
     from backend.models.mentor import Mentor
     try:
         request_body = request.json
-        subject_id = request_body.get('subject_id')
+        subject = request_body.get('subject')
 
-        if not subject_id:
+        if not subject:
             return jsonify({'success': False,
-                            'message': 'Missing required fields'}), 400
+                            'message': 'Subject name required'}), 400
 
-        mentors = Mentor.query.filter(Mentor.subjects.any(id=subject_id)).all()
+        mentors = Mentor.query.filter(Mentor.subjects.any(name=subject)).all()
+
         if mentors:
             mentors_json = [mentor.to_json() for mentor in mentors]
-            return jsonify(mentors_json), 200
+            return jsonify({'success': True, 'mentors':mentors_json, 'message':'Success'}), 200
         else:
-            return make_response(jsonify({'success': False, 'message': []}))
+            return make_response(jsonify({'success': True, 'message': []}))
     except Exception as e:
         return jsonify({'success': False,
                         'message': 'An error occurred: {}'.format(e)}), 500
 
 
 @student_api_blueprint.route('/request', methods=['POST'])
-
 def send_mentorship_request():
     """Sends a mentorship request from a student to a mentor."""
     from backend.models.mentor import Mentor
     request_body = request.json
     mentor_id = request_body.get('mentor_id')
-    subject_id = request_body.get('subject_id')
+    subject = request_body.get('subject')
     message = request_body.get('message')
     # load_user()
-    print(current_user)
-    # print(request.json)
-    # print(request.headers)
-    if current_user.is_authenticated:
+    student_id=load_user_from_request(request).id
+
+    if student_id:
+        subject = Subject.query.filter_by(name=subject).first()
+        if subject:
+            subject_id = subject.id
+
         try:
             new_request = Request()
-            new_request.student_id = current_user.id
+            new_request.student_id = student_id
             new_request.mentor_id = mentor_id
             new_request.subject_id = subject_id
             new_request.message = message
             # Check if the mentor exists and is qualified for the subject
             mentor = Mentor.query.filter_by(id=mentor_id).first()
-            print(Mentor.query.get(mentor_id))
             if mentor is None:
                 return jsonify({'success': False, 'message': 'Mentor not found'}), 404
             if not any(subject.id == subject_id for subject in mentor.subjects):
@@ -221,6 +197,19 @@ def send_mentorship_request():
     return make_response(jsonify({'success': False, 'message':
                                   'You are not logged in'}), 401)
 
+@student_api_blueprint.route('/requests')
+def get_requests():
+    """Retrieves all mentorship requests sent by the student."""
+    student=load_user_from_request(request)
+    student_id = student.id
+    if student_id:
+        requests = Request.query.filter_by(student_id=student_id).all()
+        if requests:
+            return jsonify({'success': True, 'requests': [re.to_json() for re in requests]})
+        else:
+            return jsonify({'success': True, 'requests': [], 'message': 'No mentorship requests found'})
+    else:
+        return jsonify({'success': False, 'message': 'You are not logged in'})
 
 def register_new(username, email, password):
     """Helper function to register new student"""
@@ -261,12 +250,12 @@ def initialize_password_reset():
 
 
 @student_api_blueprint.route('/request/complete', methods=['POST'])
-@login_required
 def request_completed():
     """To mark the request completed"""
     request_body = request.json
     request_id = request_body.get('request_id')
-    if current_user.is_authenticated:
+    student_id = load_user_from_request(request)
+    if student_id:
         if not request_id:
             return jsonify({'success': False, 'message':
                             'Missing required field: request_id'}), \
@@ -276,7 +265,7 @@ def request_completed():
         if not request_:
             return jsonify({'success': False,
                             'message': 'Request not found'}), 404
-        if current_user.id == request_.student_id:
+        if student_id == request_.student_id:
             request_.status = 'completed'
             db.session.commit()
             return jsonify({'success': True,
@@ -291,13 +280,15 @@ def request_completed():
 
 
 @student_api_blueprint.route('/review/mentor', methods=['POST'])
-@login_required
+
 def review_mentor():
     data = request.json
     request_id = data.get('request_id')
     rating = data.get('rating')
     review_text = data.get('review_text')
-    if current_user.is_authenticated:
+    student = load_user_from_request(request)
+    student_id = student.id
+    if student_id:
         if not request_id or not rating or not review_text:
             return jsonify({'success': False,
                             'message': 'Missing required fields'}), 400
@@ -307,12 +298,11 @@ def review_mentor():
 
         # Check if the request exists and its status is "completed"
         if request_ and request_.status == 'completed':
-            # Check if the current user is the student who made the request
-            if current_user.id == request.student_id:
+            if student_id == request_.student_id:
                 # Create a new review
                 review = Review()
-                review.student_id = current_user.id,
-                review.mentor_id = request.mentor_id,
+                review.student_id = student_id,
+                review.mentor_id = request_.mentor_id,
                 review.request_id = request_id,
                 review.rating = rating,
                 review.review_text = review_text

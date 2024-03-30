@@ -5,7 +5,8 @@ from flask import Flask
 from flask_cors import CORS
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-# from flask_jwt_extended import JWTManager
+# from flask_session import Session
+
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -29,8 +30,8 @@ def create_app():
     app.url_map.strict_slashes = False
 
     # Cross-Origin Resource Sharing
-    cors = CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
-
+    cors = CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+    # server_session = Session(app)
     with app.app_context():
         # Register blueprints
         from backend.api.student import student_api_blueprint

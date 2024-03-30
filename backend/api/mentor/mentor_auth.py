@@ -1,8 +1,7 @@
 from flask import request, jsonify, make_response
 from backend.models.mentor import Mentor
-from backend.api.mentor import mentor_api_blueprint
+from backend.api.mentor import mentor_api_blueprint, load_user_from_request, db
 from werkzeug.security import generate_password_hash
-from backend import db, login_manager
 from werkzeug.security import check_password_hash
 # from flask_jwt_extended import create_access_token, create_refresh_token
 import validators
@@ -12,23 +11,6 @@ from backend.utilis.save_image import save_image
 from backend.models.request import Request
 
 from backend.utilis.retrieve_subjects import get_or_create_subject
-
-
-@login_manager.user_loader
-def load_user(mentor_id):
-    return Mentor.query.filter_by(id=mentor_id).first()
-
-
-@login_manager.request_loader
-def load_user_from_request(request):
-    """Loads User from API"""
-    api_key = request.headers.get('Authorization')
-    if api_key:
-        api_key = api_key.replace('Basic ', '', 1)
-        mentor = Mentor.query.filter_by(api_key=api_key).first()
-        if mentor:
-            return mentor
-    return None
 
 
 @mentor_api_blueprint.route('/register', methods=['POST'])
@@ -125,13 +107,12 @@ def login_mentor():
         # Log in the user
         login_user(mentor)
         return jsonify({'success': True, 'message': 'Login successful',
-                        'api_key': mentor.api_key}), 200
+                        'api_key': mentor.api_key, 'id': mentor.id, 'name': mentor.first_name + ' ' + mentor.surname}), 200
     return jsonify({'success': False,
                     'message': 'Invalid email or password'}), 401
 
 
 @mentor_api_blueprint.route('/logout')
-@login_required
 def logout_mentor():
     """Logout logged in user"""
     if current_user.is_authenticated:
@@ -157,12 +138,20 @@ def get_mentors():
     mentors_json = [mentor.to_json() for mentor in mentors]
     return make_response(jsonify(mentors_json))
 
+@mentor_api_blueprint.route('/mentor', methods=['POST'])
+def get_mentor():
+    """Returns a  mentors"""
+    data = request.json
+    mentor = Mentor.query.filter_by(id=data.get('mentor_id')).first()
+    mentors_json = mentor.to_json()
+    return make_response(jsonify({'success':True, 'data':mentors_json}))
 
 @mentor_api_blueprint.route('/requests')
 @login_required
 def get_requests():
     """Retrieves all mentorship requests received by the mentor."""
-    if current_user.is_authenticated:
+    current_user = load_user_from_request(request)
+    if current_user:
         mentor_id = current_user.id
         requests = Request.query.filter_by(mentor_id=mentor_id).all()
         if requests:
@@ -173,11 +162,9 @@ def get_requests():
 
 
 @mentor_api_blueprint.route('/request', methods=['POST'])
-@login_required
 def get_request():
     """Retrieves detailed information about a specific mentorship request"""
     data = request.json
-    print(data)
     request_id = data.get('request_id')
     if not request_id:
         return jsonify({'success': False,
@@ -224,12 +211,11 @@ def accept_request():
         return make_response(jsonify({'success': False, 'message': 'You are not logged in'})), 401
 
 @mentor_api_blueprint.route('/request/complete', methods=['POST'])
-@login_required
 def request_completed():
     """To mark the request completed"""
     request_body = request.json
     request_id = request_body.get('request_id')
-    if current_user.is_authenticated:
+    if current_user:
         if not request_id:
             return jsonify({'success': False, 'message': 'Missing required field: request_id'}), 400
 
@@ -237,7 +223,7 @@ def request_completed():
         if not request_:
             return jsonify({'success': False, 'message': 'Request not found'}), 404
         if current_user.id == request_.mentor_id:
-            request.status = 'completed'
+            request_.status = 'completed'
             db.session.commit()
             return jsonify({'success': True, 'message': 'Request marked as completed'}), 200
         else:
@@ -245,3 +231,12 @@ def request_completed():
     else:
         return make_response(jsonify({'success': False, 'message':
                                   'You are not logged in'}), 401)
+
+@mentor_api_blueprint.route('/profile/')
+def get_mentor_profile():
+    """Retrieves student's profile Information"""
+    current_user = load_user_from_request(request)
+    if current_user:
+        return make_response(jsonify({'success': True, 'result': current_user.to_json()}))
+    return make_response(jsonify({'success': False,
+                                  'message': 'You are not logged in'}))
