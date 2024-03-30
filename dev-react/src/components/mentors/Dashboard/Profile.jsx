@@ -47,15 +47,17 @@ const MentorProfile = () => {
             <p>
               <strong>Email:</strong> {profileData.email}
             </p>
-            <p>
-              <strong>Subjects:</strong> {profileData.subjects.join(", ")}
-            </p>
+            {profileData.subjects && (
+  <p>
+    <strong>Subjects:</strong> {profileData.subjects.join(", ")}
+  </p>
+)}
             <p>
               <strong>Years of Experience:</strong>{" "}
               {profileData.years_of_experience}
             </p>
             <p>
-              <strong>Time Available:</strong> {profileData.time_available}
+              <strong>Time Available:</strong> {profileData.time_available} Tuesdays and Thursdays
             </p>
           </div>
         )}

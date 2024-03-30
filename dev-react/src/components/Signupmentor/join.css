@@ -24,7 +24,7 @@
     margin-top: 50px;
 }
 .box-req {
-    max-width: 250px;
+    max-width: 300px;
     text-align: center;
     padding: 20px;
     margin: 20px 10px 0px 10px;
@@ -32,6 +32,8 @@
     border-radius: 10px;
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
+    color: white;
+    flex: 1 1 calc(33.33% - 20px);
 }
 .box-req h3, .box-req p, .m-icons {
     color: #081227 !important;
@@ -40,3 +42,23 @@
     margin-top: 50px;
     text-align: center;
 }
+.card-con {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  @media (max-width: 768px) {
+    .box-req {
+      flex: 1 1 calc(50% - 20px); /* Adjust width for 2 cards per row on smaller screens */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .box-req {
+      flex: 1 1 calc(100% - 20px); /* Adjust width for 1 card per row on even smaller screens */
+    }
+  }
+
+  .box-req h3, .box-req p {
+    color: white !important;
+  }

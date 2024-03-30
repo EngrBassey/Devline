@@ -1,154 +1,182 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 .signin-box {
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-    background-color: #17181E;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  background-color: #17181e;
 }
 .signin-box h2 {
-    font-family: "Poppins", sans-serif;
-    font-size: 34px;
-    font-weight: 600;
-    font-style: normal;
-    color: #fff;
-    text-align: center;
-    margin-top: 70px;
+  font-family: "Poppins", sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+  font-style: normal;
+  color: #fff;
+  text-align: center;
+  margin-top: 70px;
 }
 .signin-section {
-    width: 70%;
+  width: 70%;
 }
 .signin-section .btn-social {
-    border: 0.5px solid #DF6ABA;
-    background-color: #17181E;
-    border-radius: 12px;
-    width: 300px;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
+  border: 0.5px solid #df6aba;
+  background-color: #17181e;
+  border-radius: 12px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
 }
 .box-input {
-    border: 0.5px solid #DF6ABA;
-    background-color: #17181E;
-    border-radius: 12px;
-    width: 250px;
-    height: 40px;
-    padding-left: 20px;
-    color: #fff;
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
+  border: 0.5px solid #df6aba;
+  background-color: #17181e;
+  border-radius: 12px;
+  width: 250px;
+  height: 40px;
+  padding-left: 20px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
 }
 .btn-child {
-    display: flex;
-    align-items: center;
-    color: #fff;
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
 }
-::placeholder, p {
-    color: #ffff;
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
+::placeholder:last-child {
+  color: black;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+::placeholder:not(:last-child),
+p {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+select.box-input option[value=""]::placeholder {
+  /* Your separate styling for the placeholder */
+  color: #ff0000; /* For example, change the color to red */
 }
 .acct-txt {
-    font-size: 14px;
-    margin-right: 10px;
+  font-size: 14px;
+  margin-right: 10px;
+  color: white;
 }
 .box-3 {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 .btn-child p {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 .box-2 {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 .box-4 {
-    padding: 12px 0px;
-    color: #fff;
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    margin-top: 30px;
-    background: #DF6ABA !important;
+  padding: 12px 0px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  margin-top: 10px;
+  background: #df6aba !important;
 }
 .socials-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .account-box {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 .f-pass {
-    text-align: center;
+  text-align: center;
 }
 .sphere-box {
-    position: relative;
+  position: relative;
 }
-.sphere-1, .sphere-2 {
-    position: absolute;
+.sphere-1,
+.sphere-2 {
+  position: absolute;
 }
 .choices {
-    font-family: "Montserrat", sans-serif;
-    font-size: 14px;
-  }
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  min-width: 220px;
+  background-color: #17181e;
+}
+.choices__input {
+  background-color: #17181e;
+}
+.choices__inner {
+  background-color: #282c34; /* Background color */
+  border: 1px solid #df6aba; /* Border color */
+  border-radius: 8px; /* Border radius */
+  color: #fff; /* Text color */
+}
 
-  .choices__inner {
-    background-color: #282c34; /* Background color */
-    border: 1px solid #DF6ABA; /* Border color */
-    border-radius: 8px; /* Border radius */
-    color: #fff; /* Text color */
-  }
+.choices__list {
+  padding: 8px 0;
+}
 
-  .choices__list {
-    padding: 8px 0; /* Padding around the dropdown list */
-  }
+.choices__list--dropdown {
+  margin-top: 4px; /* Adjust the distance from the input */
+}
 
-  .choices__list--dropdown {
-    margin-top: 4px; /* Adjust the distance from the input */
-  }
+.choices__list--multiple .choices__item {
+  background-color: #df6aba; /* Background color for selected items */
+  border: none; /* Remove border for selected items */
+  color: #fff; /* Text color for selected items */
+}
 
-  .choices__list--multiple .choices__item {
-    background-color: #DF6ABA; /* Background color for selected items */
-    border: none; /* Remove border for selected items */
-    color: #fff; /* Text color for selected items */
-  }
+.choices__list--multiple .choices__item[data-selected] {
+  background-color: #df6aba; /* Background color for hovered items */
+}
 
-  .choices__list--multiple .choices__item[data-selected] {
-    background-color: #DF6ABA; /* Background color for hovered items */
-  }
+.choices__list--multiple .choices__item[data-highlighted] {
+  background-color: #df6aba; /* Background color for highlighted items */
+}
 
-  .choices__list--multiple .choices__item[data-highlighted] {
-    background-color: #DF6ABA; /* Background color for highlighted items */
-  }
+.choices__list--dropdown .choices__item {
+  padding: 8px 12px; /* Padding for dropdown items */
+}
 
-  .choices__list--dropdown .choices__item {
-    padding: 8px 12px; /* Padding for dropdown items */
-  }
+.choices__list--dropdown .choices__item.is-highlighted {
+  background-color: #df6aba; /* Background color for hovered dropdown items */
+}
 
-  .choices__list--dropdown .choices__item.is-highlighted {
-    background-color: #DF6ABA; /* Background color for hovered dropdown items */
-  }
+.choices__list--dropdown .choices__item.is-highlighted[data-active] {
+  background-color: #df6aba; /* Background color for active dropdown item */
+}
 
-  .choices__list--dropdown .choices__item.is-highlighted[data-active] {
-    background-color: #DF6ABA; /* Background color for active dropdown item */
-  }
+.choices__input {
+  height: 40px; /* Height of the input */
+  padding: 8px 12px; /* Padding inside the input */
+  border: 1px solid #df6aba; /* Border color */
+  border-radius: 8px; /* Border radius */
+  /* color: #fff; */
+  min-width: 200px;
+  background-color: #17181e;
+}
+.choices__input ::placeholder {
+  background-color: #17181e;
+}
 
-  .choices__input {
-    height: 40px; /* Height of the input */
-    padding: 8px 12px; /* Padding inside the input */
-    border: 1px solid #DF6ABA; /* Border color */
-    border-radius: 8px; /* Border radius */
-    color: #fff; /* Text color */
-  }
+.choices__list--dropdown .choices__list {
+  background-color: #282c34; /* Background color for dropdown list */
+  border: 1px solid #df6aba;
+  min-width: 200px; /* Border color for dropdown list */
+  border-radius: 8px;
+  /* Border radius for dropdown list */
+}
 
-  .choices__list--dropdown .choices__list {
-    background-color: #282c34; /* Background color for dropdown list */
-    border: 1px solid #DF6ABA; /* Border color for dropdown list */
-    border-radius: 8px; /* Border radius for dropdown list */
-  }
+.choices__list--dropdown .choices__list.is-active {
+  display: block;
+  color: #17181e;
+}
 
-  .choices__list--dropdown .choices__list.is-active {
-    display: block; /* Show the dropdown list */
-  }
+.last {
+  padding-left: 150px;
+}

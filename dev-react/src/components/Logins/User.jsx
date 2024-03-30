@@ -23,8 +23,12 @@ const User = () => {
           </button>
           <div>
             <div className="account-box">
-              <p className="acct-txt">You don't account?</p>
-              <a href="">Sign up</a>
+              <p className="acct-txt">You don't account?</p> <br />
+              <a href="/register-mentor"> Sign up Mentor</a>
+            </div>
+            <div className="account-box last">
+            <a href="/register"> or as Student</a>
+
             </div>
           </div>
         </div>

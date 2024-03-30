@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import logo from "../../assets/logo-1.png";
 import { Link, useNavigate } from "react-router-dom";
+import About from "../about/About";
+import Howitworks from "../howitworks/howitworks";
 import "./navbar.css";
 
 const Menu = () => (
@@ -10,10 +12,10 @@ const Menu = () => (
       <a href="/">Home</a>
     </p>
     <p>
-      <a href="#mentors">About us</a>
+      <a href="/about">About us</a>
     </p>
     <p>
-      <a href="#offer">How it Works</a>
+      <a href="/how">How it Works</a>
     </p>
     <p>
       <Link to="/mentor-join">Become a Mentor</Link>
@@ -41,7 +43,9 @@ const Navbar = () => {
     <div className="gpt3__navbar">
       <div className="gpt3__navbar-links">
         <div className="gpt3__navbar-links_logo">
+        <a href="/">
           <img src={logo} alt="Logo" />
+          </a>
         </div>
       </div>
       <div className="gpt3__navbar-links_container">

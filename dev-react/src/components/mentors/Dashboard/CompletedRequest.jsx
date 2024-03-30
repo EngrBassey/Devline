@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./listbox.css";
 import MentorAuth from "../API";
 import { Link } from "react-router-dom";
+import Sidebar from "./Sidebar";
+import Nav from "./Nav";
 
 const CompletedRequests = () => {
   const [requests, setRequests] = useState([]);
@@ -31,7 +33,20 @@ const CompletedRequests = () => {
     fetchRequests();
   }, []);
 
+  const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
+
+  const OpenSidebar = () => {
+    setOpenSidebarToggle(!openSidebarToggle);
+  };
+
   return (
+    <div className="grid-container">
+    <Nav OpenSidebar={OpenSidebar} />
+    <Sidebar
+      openSidebarToggle={openSidebarToggle}
+      OpenSidebar={OpenSidebar}
+    />
+    <div className="tracking">
     <div className="mentor-requests-container">
       {error && <p className="error-message">{error}</p>}
       {requests == undefined || requests === null ? (
@@ -67,6 +82,8 @@ const CompletedRequests = () => {
           </div>
         </>
       )}
+    </div>
+    </div>
     </div>
   );
 };

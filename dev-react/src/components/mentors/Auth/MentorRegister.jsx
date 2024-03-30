@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "../../students/Auth/sign.css";
 import FullSphere from "../../../assets/sphere (1).png";
 import HalfSphere from "../../../assets/sphere.png";
+import TimePicker from 'react-time-picker';
 import Choices from 'choices.js';
+import 'choices.js/public/assets/styles/choices.css'; // Import Choices CSS
 
 import MentorAuth from "../API";
 
@@ -36,19 +38,22 @@ const SignUpForm = () => {
       removeItemButton: true,
     });
 
-    selectElement.addEventListener('change', (event) => {
+    const handleSubjectChange = (event) => {
       const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
-      setFormData({ ...formData, subjects: selectedOptions });
-    });
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        subjects: selectedOptions,
+      }));
+    };
+
+    selectElement.addEventListener('change', handleSubjectChange);
 
     return () => {
       choices.destroy();
-      selectElement.removeEventListener('change', (event) => {
-        const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
-        setFormData({ ...formData, subjects: selectedOptions });
-      });
+      selectElement.removeEventListener('change', handleSubjectChange);
     };
   }, []);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,6 +71,7 @@ const SignUpForm = () => {
 
     try {
       // Register mentor
+      console.log(formData)
       const response = await MentorAuth.register(formData);
 
       if (response.success) {
@@ -84,8 +90,8 @@ const SignUpForm = () => {
 
   const subjects = [
     "JavaScript", "Python", "Java", "C++", "Parallel Computing", "Cryptocurrency",
-    "HTML", "CSS", "PHP", "Ruby", "Swift", "TypeScript", "Go", "Kotlin", "Rust",
-    "SQL", "R", "Shell", "Scala", "Lua", "Algorithm Design", "Data Structures",
+    "HTML", "CSS", "PHP", "Ruby", "TypeScript", "Go", "Rust",
+    "SQL", "R", "Shell", "Algorithm Design", "Data Structures",
     "Web Development", "Mobile App Development", "Game Development",
     "Network Programming", "CyberSecurity", "Machine Learning",
     "Artificial Intelligence", "Data Science", "Database Management",
@@ -97,8 +103,8 @@ const SignUpForm = () => {
   return (
     <div className="signin-box">
       <div className="sphere-box">
-        <img src={HalfSphere} className="sphere-1" alt="" />
-        <img src={FullSphere} className="sphere-2" alt="fullsphere" />
+        <img src={HalfSphere} className="sphere-1" alt="" style={{ width: "200px" }}/>
+        <img src={FullSphere} className="sphere-2" alt="fullsphere" style={{ width: "90px" }}/>
       </div>
       <div className="signin-section">
         <h2>Sign Up as a Mentor</h2>
@@ -167,20 +173,23 @@ const SignUpForm = () => {
               onChange={handleChange}
             />
             <input
-              type={type}
-              onFocus={() => setType('time')}
+              type="time"
+            //   onFocus={() => setType('time')}
               onBlur={() => setType('text')}
               name="time_available"
               className="box-input box-3"
-              placeholder="HH:MM)"
+              placeholder="Time Available HH:MM"
               value={formData.time_available}
               onChange={handleChange}
             />
+            <br />
             <select
               multiple
               className="box-input box-3"
+                          style={{ backgroundColor: "black" }}
               ref={selectRef}
             >
+                          <option value="" style={{ backgroundColor: "black", color: "black" }} class="select">Select Subjects</option>
               {subjects.map((subject) => (
                 <option key={subject} value={subject}>
                   {subject}
